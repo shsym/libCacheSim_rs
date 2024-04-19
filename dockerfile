@@ -21,7 +21,7 @@ RUN bash ./scripts/install_libcachesim.sh
 
 
 WORKDIR /libCacheSim/_build/
-# RUN cmake -DSUPPORT_ZSTD_TRACE=on .. && make -j && sudo make install
+RUN cmake -DSUPPORT_ZSTD_TRACE=on .. && make -j && sudo make install
 
 
 WORKDIR /libCacheSim/_build/bin/
