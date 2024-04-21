@@ -1,7 +1,7 @@
 #!just
 
 build_docker:
-    sudo docker build -t libcachesim .
+    sudo docker build -t libcachesim_rs --file ./dockerfile_rs .
 
 run_docker:
     sudo docker run -v "$HOME/Downloads/cachelib-workload/libcachesim:/workload:ro" -v "$(pwd):/libcachsim_repo" --name libcachsim_docker -it libcachesim_rs
