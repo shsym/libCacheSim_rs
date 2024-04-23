@@ -16,6 +16,7 @@ fn main() {
     let cache_size: usize = cache_size_in_mb * 1024 * 1024;
     let period = 10000;
     let mut lru_cache = LRUCache::new(cache_size);
+    let mut size_record: HashMap<u64, usize> = HashMap::new();
 
     let reader_idx = open_trace_oracle_rs(path);
     if reader_idx < 0 {
@@ -51,6 +52,10 @@ fn main() {
                     }
                 }
                 // process_request(&req, &mut cache_map, &mut lru_deque, &mut current_cache_size, cache_size, &mut cache_hits, &mut cache_bandwidth_used);
+                if size_record.get(&req.obj_id).is_some() {
+                    size_record.remove(&req.obj_id);
+                }
+                size_record.insert(req.obj_id, req.obj_size as usize);
             },
             None => {
                 // println!("No more requests in the trace");
@@ -74,6 +79,11 @@ fn main() {
         // }
     }
     close_trace_rs(reader_idx);
+    // compute total workingset size
+    let mut total_workingset_size = 0;
+    for (_, size) in size_record.iter() {
+        total_workingset_size += size;
+    }
     // print out final stats
     let hit_ratio = cache_hits as f64 / total_requests as f64;
     if total_time_span != 0 {
@@ -86,6 +96,7 @@ fn main() {
             total_requests, 1. - hit_ratio, total_bw_used / 1024 / 1024
         );
     }
+    println!("== workingset size: {} MB ==", total_workingset_size / 1024 / 1024);
 }
 
 // fn process_request(req: &Request, cache_map: &mut HashMap<u64, usize>, lru_deque: &mut VecDeque<u64>, current_cache_size: &mut usize, cache_size: usize, cache_hits: &mut u32, cache_bandwidth_used: &mut usize) {
