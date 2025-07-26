@@ -2,7 +2,7 @@
 
 [![build](https://github.com/1a1a11a/libCacheSim/actions/workflows/build.yml/badge.svg)](https://github.com/1a1a11a/libCacheSim/actions/workflows/build.yml)
 
-#### The main development of libCacheSim is at [https://github.com/1a1a11a/libCacheSim](https://github.com/1a1a11a/libCacheSim), the [cachemon](https://github.com/cachemon/libCacheSim) repo is a mirror of the stable branch. Please fork and submit PR to this repo. 
+#### The main development of libCacheSim is at [https://github.com/1a1a11a/libCacheSim](https://github.com/1a1a11a/libCacheSim), the [cachemon](https://github.com/cachemon/libCacheSim) repo is a mirror of the stable branch. This is a fork to build libraries in a Docker container. Please fork and submit PR to the original repo. 
 
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 - [What is libCacheSim](#what-is-libcachesim)
